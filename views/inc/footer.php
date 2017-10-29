@@ -1,0 +1,1 @@
+<footer><p>UHA © All right reserved. By M1 MIAGE G7</p></footer>
