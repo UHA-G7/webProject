@@ -40,6 +40,16 @@
             </li>
             
             <li>
+                <a href="#"><i class="fa fa-sitemap"></i> Gestion des Utilisateurs<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="<?= URL_BASE ?>/User/ajoutUser/">Ajouter un utilisateur</a>
+                    </li>
+                    
+                    
+                </ul>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-sitemap"></i> Facultés<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
