@@ -33,6 +33,24 @@
                             <!--   Formulaire d'ajout d'un Utilisateur -->    
                             <form role="form" action="<?= URL_BASE ?>/User/ajoutUser" method="POST">
                                 <div class="form-group">
+                                    <label>Profil</label>
+                                    <select name="userProfil">
+                                        <option value="">Vacataire</option>
+                                        <option value="">Responsable Administratif</option>
+                                        <option value="">Responsable Formation</option>
+                                        <option value="">Responsable Financier</option>
+                                        <option value="">Controleur Gestion</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Formation</label>
+                                    <select name="formaId"  >
+                                        <?php foreach ($forms as $f) : ?>
+                                            <option value="<?= $f['formationId'] ?>"><?= $f['formationNom'] ?></option>
+                                        <?php endforeach; ?>  
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Nom </label>
                                     <input class="form-control" type="text"  name="userNom">
                                 </div>
@@ -41,8 +59,12 @@
                                     <input class="form-control"  type="text" name="userPrenom">
                                 </div>
                                 <div class="form-group">
-                                    <label>Profile</label>
-                                    <input class="form-control" type="text" name="userProfile">
+                                    <label>Employeur</label>
+                                    <input class="form-control"  type="text" name="userEmp">
+                                </div>
+                                <div class="form-group">
+                                    <label>Adresse</label>
+                                    <input class="form-control"  type="text" name="userAddr">
                                 </div>
                                 <div class="form-group">
                                     <label>Téléphone</label>
