@@ -21,58 +21,41 @@
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
                         <li><a href="<?= URL_BASE ?>/Formation/listFormations/">Formations</a></li>
-                        <?php if (isset($act) && ($act === 'add')) : ?>
-                            <li class="active">Ajout d'une formation</li>
-                        <?php endif; ?>
-                        <?php if (isset($act) && ($act === 'modif')) : ?>
-                            <li class="active">Modification d'une formation</li>
-                        <?php endif; ?>
+                        <li class="active"><?php if (isset($sub_title)) echo $sub_title; ?></li> 
                     </ol> 
 
                 </div>
                 <div id="page-inner">
                     <div class="panel-body">
                         <div class="col-lg-6">
-                            <?php if (isset($act) && ($act === 'add')) : ?>
-                               <!--   Formulaire d'ajout d'une formation -->    
-                                <form role="form" action="<?= URL_BASE ?>/Formation/actionAjoutFormation" method="POST">
-                                    <div class="form-group">
-                                        <label>Nom de la formation</label>
-                                        <input class="form-control"  name="formaNom">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Faculté</label>
-                                        <select name="facId">
-                                            <?php foreach ($facs as $f) : ?>
-                                            <option value="<?= $f['faculteId']?>"><?= $f['faculteNom']?></option>
-                                            <?php endforeach; ?>  
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Ajouter</button>
-
-                                </form>
-                            <?php endif; ?>
-                            <?php if (isset($act) && ($act === 'modif')) : ?>
-                                 <!--   Formulaire de modification d'une formation -->    
-                                <form role="form" action="<?= URL_BASE ?>/Formation/actionModiFormation" method="POST">
-                                    <?php foreach ($form as $fo) { ?>
+                               
+                                <form role="form" action="<?= URL_BASE.'/Formation/'.$functionUrl ?>" method="POST">
                                         <div class="form-group">
                                             <label>Nom de la formation</label>
-                                            <input class="form-control" type="hidden" name="formaId" value="<?= $fo['formationId'] ?>">
-                                            <input class="form-control"  name="formaNom" value="<?= $fo['formationNom'] ?>">
+                                            <?php if(isset($form)){ foreach ($form as $fo):?>
+                                                 <input class="form-control" type="hidden" name="formaId" value="<?= $fo['formationId'] ?>">
+                                            <?php endforeach;}?>
+                                            <input class="form-control"  name="formaNom" value="<?php if(isset($form)){ foreach ($form as $fo): echo $fo['formationNom'];endforeach;}   ?>">
                                         </div>
                                         <div class="form-group">
                                             <select name="facId">
                                                <?php foreach ($facs as $f) : ?>
-                                                <option value="<?= $f['faculteId']?>" <?php if($f['faculteId']==$fo['faculteId']): echo 'selected'; endif; ?>><?= $f['faculteNom']?></option>
+                                                <option value="<?= $f['faculteId']?>" 
+                                                    <?php if(isset($form)){ 
+                                                        foreach ($form as $fo):
+                                                            if($f['faculteId']==$fo['faculteId']):
+                                                                echo 'selected';
+                                                            endif; 
+                                                         endforeach; }?>>
+                                                         <?= $f['faculteNom']?>
+                                                </option>
                                                <?php endforeach; ?>  
                                            </select>
-                                        </div>
-                                    <?php } ?>
-                                        <button type="submit" class="btn btn-default">Modifier</button>
+                                        </div>                                    
+                                        <button type="submit" class="btn btn-default">Enregistrer</button>
 
                                 </form>
-                            <?php endif; ?>
+                            
 
                         </div>                      
                     </div>

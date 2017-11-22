@@ -5,9 +5,10 @@
 class FormationController {
 
     public function ajoutFormation() {
-        $act = "add";
         $mfac = new ModelFaculte();
         $facs = $mfac->getAllFacs();
+        $functionUrl="actionAjoutFormation";
+        $sub_title = "Ajout d'une formation";
         include_once VIEWS . DS . 'ajoutformation.php';
     }
 
@@ -47,7 +48,8 @@ class FormationController {
         $form = $m->getFormation($id);
         $mfac = new ModelFaculte();
         $facs = $mfac->getAllFacs();
-        $act = "modif";
+        $functionUrl="actionModiFormation";
+        $sub_title = "Modification d'une formation";
         include_once VIEWS . DS . 'ajoutFormation.php';
     }
 

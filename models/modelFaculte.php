@@ -11,6 +11,7 @@ class ModelFaculte {
         $bdd = Connexion::getInstance();
         $req = $bdd->prepare('INSERT INTO faculte (faculteNom) VALUES (:nom)');
         $req->execute(array('nom' => $nom));
+        
     }
     // fonction qui renvoi toutes les facultés de la base de données
     public function getAllFacs() {

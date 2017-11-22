@@ -6,7 +6,8 @@ class FaculteController {
 
     // fonction qui affiche le formulaire d'ajout d'une faculté
     public function ajoutFaculte() {
-        $act = "add";
+        $sub_title = "Ajout d'une faculté";
+        $functionUrl="actionAjoutFaculte";
         include_once VIEWS . DS . 'ajoutFaculte.php';
     }
 
@@ -14,8 +15,9 @@ class FaculteController {
      * et la fonction addFacc() du model faculté pour l'ajout 
      */
 
-    public function actionAjoutFac() {
-        $nom = filter_input(INPUT_POST, 'nomFac', FILTER_SANITIZE_STRING);
+    public function actionAjoutFaculte() {
+        $nom = filter_input(INPUT_POST, 'facNom', FILTER_SANITIZE_STRING);
+        echo $nom."857";
         $m = new ModelFaculte();
         $m->addFac($nom);
         header('Location: ' . URL_BASE . '/Faculte/listFacultes');
@@ -43,7 +45,8 @@ class FaculteController {
         $id = filter_input(INPUT_GET, 'facId', FILTER_SANITIZE_NUMBER_INT);
         $m = new ModelFaculte();
         $fac = $m->getFaculte($id);
-        $act = "modif";
+        $sub_title = "Modification d'une faculté";
+        $functionUrl="actionModiFaculte";
         include_once VIEWS . DS . 'ajoutFaculte.php';
     }
 

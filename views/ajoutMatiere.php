@@ -21,58 +21,44 @@
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
                         <li><a href="<?= URL_BASE ?>/Matiere/listMatieres">Matières</a></li>
-                        <?php if (isset($act) && ($act === 'add')) : ?>
-                            <li class="active">Ajout d'une matière</li>
-                        <?php endif; ?>
-                        <?php if (isset($act) && ($act === 'modif')) : ?>
-                            <li class="active">Modification d'une matière</li>
-                        <?php endif; ?>
+                        <li class="active"><?php if (isset($sub_title)) echo $sub_title; ?></li>    
                     </ol> 
 
                 </div>
                 <div id="page-inner">
                     <div class="panel-body">
                         <div class="col-lg-6">
-                            <?php if (isset($act) && ($act === 'add')) : ?>
-                                 <!--   Formulaire d'ajout d'une matière -->    
-                                <form role="form" action="<?= URL_BASE ?>/Matiere/actionAjoutMatiere" method="POST">
-                                    <div class="form-group">
-                                        <label>Nom de la matière</label>
-                                        <input class="form-control"  name="matNom">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Formation</label>
-                                        <select name="formaId">
-                                            <?php foreach ($forms as $f) : ?>
-                                            <option value="<?= $f['formationId']?>"><?= $f['formationNom']?></option>
-                                            <?php endforeach; ?>  
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Ajouter</button>
-
-                                </form>
-                            <?php endif; ?>
-                            <?php if (isset($act) && ($act === 'modif')) : ?>
+                            
                                   <!--   Formulaire de modification d'une matière -->    
-                                <form role="form" action="<?= URL_BASE ?>/Matiere/actionModifMatiere" method="POST">
-                                    <?php foreach ($mat as $m) { ?>
+                                <form role="form" action="<?= URL_BASE.'/Matiere/'.$functionUrl?>" method="POST">
+                                    
                                         <div class="form-group">
                                             <label>Nom de la Matière</label>
-                                            <input class="form-control" type="hidden" name="matId" value="<?= $m['matiereId'] ?>">
-                                            <input class="form-control"  name="matNom" value="<?= $m['matiereNom'] ?>">
+                                            <?php if(isset($mat)){ foreach ($mat as $m):?>
+                                             <input class="form-control" type="hidden" name="matId" value="<?= $m['matiereId'] ?>">
+                                            <?php endforeach;} ?>
+                                                 <input class="form-control"  name="matNom" value="<?php if(isset($mat)){ foreach ($mat as $m): echo $m['matiereNom']; endforeach;} ?>">
                                         </div>
                                         <div class="form-group">
                                             <select name="formaId">
                                                <?php foreach ($forms as $f) : ?>
-                                                <option value="<?= $f['formationId']?>" <?php if($f['formationId']==$m['formationId']): echo 'selected'; endif; ?>><?= $f['formationNom']?></option>
+                                                <option value="<?= $f['formationId']?>"
+                                                 <?php if(isset($mat)){ 
+                                                     foreach ($mat as $m):
+                                                        if($f['formationId']==$m['formationId']):
+                                                             echo 'selected';
+                                                        endif;
+                                                 endforeach;}?>>
+                                                 <?= $f['formationNom']?>
+                                                </option>
                                                <?php endforeach; ?>  
                                            </select>
                                         </div>
-                                    <?php } ?>
-                                        <button type="submit" class="btn btn-default">Modifier</button>
+                                    
+                                        <button type="submit" class="btn btn-default">Enregistrer</button>
 
                                 </form>
-                            <?php endif; ?>
+                           
 
                         </div>                      
                     </div>

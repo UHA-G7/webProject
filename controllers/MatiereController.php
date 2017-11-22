@@ -6,7 +6,8 @@ class MatiereController {
 
     // fonction qui affiche le formulaire d'ajout d'une matière
     public function ajoutMatiere() {
-        $act = "add";
+        $functionUrl="actionAjoutMatiere";
+        $sub_title = "Ajout d'une matière";
         $mform = new ModelFormation();
         $forms = $mform->getAllFormations();
         include_once VIEWS . DS . 'ajoutMatiere.php';
@@ -48,7 +49,8 @@ class MatiereController {
         $mat = $m->getMatiere($id);
         $mform = new ModelFormation();
         $forms = $mform->getAllFormations();
-        $act = "modif";
+        $functionUrl="actionModifMatiere";
+        $sub_title = "Modification d'une matière";
         include_once VIEWS . DS . 'ajoutMatiere.php';
     }
 
