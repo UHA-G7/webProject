@@ -1,4 +1,5 @@
 <?php
+session_start();
 error_reporting(E_STRICT | E_ALL);
 date_default_timezone_set('Europe/Paris');
 // PROJECT DEFINES =============================================================

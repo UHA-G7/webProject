@@ -8,7 +8,19 @@
  */
 
 class ModelContGestion{
-
+     public function logincheck($uname, $upwd) {
+        $bdd = Connexion::getInstance();
+        $sql = "SELECT controleurEmail, controleurPasse FROM controleurgestion WHERE controleurEmail=? AND controleurPasse=?";
+        $req = $bdd->prepare($sql);
+        $req->bindParam(1, $uname, PDO::PARAM_STR);
+        $req->bindParam(2, $upwd, PDO::PARAM_STR);
+        $req->execute();
+        $res = $req->fetchAll(PDO::FETCH_OBJ);
+        if (count($res) === 1)
+            return true;
+        else
+            return false;
+    }
     // fonction qui ajoute un respondable administratif dans la base de données
     public function add($nom,$prenom,$adresse,$phone,$email,$pwd) {
         $bdd = Connexion::getInstance();
