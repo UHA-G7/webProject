@@ -30,7 +30,7 @@
                         <div class="col-lg-6">
 
                             <form role="form" action="<?= URL_BASE.'/Faculte/'.$functionUrl ?>" method="POST">
-                                <?php   { ?>
+                               
                                     <div class="form-group">
                                         <label>Nom de la faculté</label>
                                         <?php if(isset($fac)){ foreach ($fac as $f):?>
@@ -39,7 +39,7 @@
                                             <input class="form-control"  name="facNom" 
                                                    value="<?php if(isset($fac)){ foreach ($fac as $f): echo $f['faculteNom'];endforeach;} ?>">
                                                 </div>
-                                            <?php } ?>
+                               
                                             <button type="submit" class="btn btn-default">Enregistrer</button>
 
                             </form>                                     

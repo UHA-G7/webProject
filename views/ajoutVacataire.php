@@ -20,8 +20,8 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
-                        <li><a href="<?= URL_BASE ?>/User/listUsers/">Utilisateurs</a></li>
-                        <li class="active">Ajout d'un utilisateur</li>
+                        <li><a href="<?= URL_BASE ?>/Vacataire/listVacataires/">Vacataires</a></li>
+                        <li class="active"><?php if (isset($sub_title)) echo $sub_title; ?></li>   
 
                     </ol> 
 
@@ -31,54 +31,40 @@
                         <div class="col-lg-6">
 
                             <!--   Formulaire d'ajout d'un Utilisateur -->    
-                            <form role="form" action="<?= URL_BASE ?>/User/ajoutUser" method="POST">
-                                <div class="form-group">
-                                    <label>Profil</label>
-                                    <select name="userProfil">
-                                        <option value="">Vacataire</option>
-                                        <option value="">Responsable Administratif</option>
-                                        <option value="">Responsable Formation</option>
-                                        <option value="">Responsable Financier</option>
-                                        <option value="">Controleur Gestion</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Formation</label>
-                                    <select name="formaId"  >
-                                        <?php foreach ($forms as $f) : ?>
-                                            <option value="<?= $f['formationId'] ?>"><?= $f['formationNom'] ?></option>
-                                        <?php endforeach; ?>  
-                                    </select>
-                                </div>
+                            <form role="form" action="<?= URL_BASE.'/Vacataire/'.$functionUrl?>" method="POST">
+                              
+                                <?php if(isset($vac)){ foreach ($vac as $v):?>
+                                             <input class="form-control" type="hidden" name="vacId"  value="<?= $v['vacataireId']; ?>">                                            
+                                         <?php endforeach;} ?>
                                 <div class="form-group">
                                     <label>Nom </label>
-                                    <input class="form-control" type="text"  name="userNom">
+                                    <input class="form-control" type="text" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacataireNom']; endforeach;} ?>"  name="userNom" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>Prénom</label>
-                                    <input class="form-control"  type="text" name="userPrenom">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacatairePrenom']; endforeach;} ?>"  type="text" name="userPrenom" required="required">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="employeur">
                                     <label>Employeur</label>
-                                    <input class="form-control"  type="text" name="userEmp">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacataireEmployeur']; endforeach;} ?>"   type="text" name="userEmp" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>Adresse</label>
-                                    <input class="form-control"  type="text" name="userAddr">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacataireAdresse']; endforeach;} ?>"   type="text" name="userAddr" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input class="form-control"type="number" name="userPhone">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacatairePhone']; endforeach;} ?>"  type="number" name="userPhone" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input class="form-control"type="email" name="userEmail">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacataireEmail']; endforeach;} ?>"  type="email" name="userEmail" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label>Mot de passe</label>
-                                    <input class="form-control" type="password"  name="userEmail">
+                                    <input class="form-control" value="<?php if(isset($vac)){ foreach ($vac as $v): echo $v['vacatairePasse']; endforeach;} ?>"  type="password"  name="userPwd" required="required">
                                 </div>
-                                <button type="submit" class="btn btn-default">Ajouter</button>
+                                <button type="submit" class="btn btn-default">Enregistrer</button>
 
                             </form>
 

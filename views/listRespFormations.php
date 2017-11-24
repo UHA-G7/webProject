@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>UHA: Gestion dees vacataires</title>
+        <title>UHA: Gestion dees respForms</title>
         <?php include_once 'inc/top.php'; ?>  
 
     </head>
@@ -16,11 +16,12 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        UHA <small>Gestion des vacataires</small>
+                        UHA <small>Gestion des Vacataires</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
-                        <li><a href="#">Matères</a></li>
+                        <li><a href="#">Utilisateurs</a></li>
+                        <li class="active"><a href="#">Responsables des Formations</a></li>
                         
                     </ol> 
 
@@ -29,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des matières <a href="<?= URL_BASE ?>/Matiere/ajoutMatiere/"><button class="btn-default pull-right">Ajouter une matière</button></a>
+                            Liste des Responsables des Formations <a href="<?= URL_BASE ?>/RespFormation/add/"><button class="btn-default pull-right">Ajouter un Responsable de Formation</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -37,18 +38,26 @@
                                     <thead>
                                         <tr>
                                             <th>Identifient</th>
-                                            <th>Nom de la matière</th>
-                                            <th>Action</th>
+                                            <th>Nom</th>
+                                            <th>Prenom</th>
+                                            <th>Adresse</th>
+                                            <th>Adresse</th>
+                                            <th>Phone</th>
+                                            <th>E-mail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                      <?php foreach ($list as $l) {?>  
                                        <tr class="gradeX">
-                                            <td><?= $l['matiereId'] ?></td>
-                                            <td><?= $l['matiereNom'] ?></td>
+                                            <td><?= $l['respFormId'] ?></td>
+                                            <td><?= $l['respFormNom'] ?></td>
+                                            <td><?= $l['respFormPrenom'] ?></td>
+                                            <td><?= $l['respFormAdresse'] ?></td>
+                                            <td><?= $l['respFormPhone'] ?></td>
+                                            <td><?= $l['respFormEmail'] ?></td>
                                             <td>
-                                                <button class="btn-danger" onclick="supprimerMatiere(<?= $l['matiereId']?>)">Supprimer</button>
-                                                <a href="<?= URL_BASE.'/Matiere/modifMatiere?matId='.$l['matiereId']?>"><button class="btn-default">Modifier</button></a>
+                                                <button class="btn-danger" onclick="supprimerRespFormation(<?= $l['respFormId']?>)">Supprimer</button>
+                                                <a href="<?= URL_BASE.'/RespFormation/update?userId='.$l['respFormId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>
                                             
                                         </tr>

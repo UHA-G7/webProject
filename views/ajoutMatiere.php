@@ -40,6 +40,7 @@
                                                  <input class="form-control"  name="matNom" value="<?php if(isset($mat)){ foreach ($mat as $m): echo $m['matiereNom']; endforeach;} ?>">
                                         </div>
                                         <div class="form-group">
+                                            <label>Formation</label>
                                             <select name="formaId">
                                                <?php foreach ($forms as $f) : ?>
                                                 <option value="<?= $f['formationId']?>"

@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_STRICT | E_ALL);
 date_default_timezone_set('Europe/Paris');
-
 // PROJECT DEFINES =============================================================
 define('DS', DIRECTORY_SEPARATOR); 
 define('WEBROOT', dirname(__FILE__)); 
@@ -36,17 +35,14 @@ require_once LIBS.DS.'Dispatcher.php';
 include MODELS.DS.'modelFaculte.php';
 include MODELS.DS.'modelFormation.php';
 include MODELS.DS.'modelMatiere.php';
-//require_once LIBS.DS.'Controller.php';
-//require_once LIBS.DS.'View.php';
-//require_once LIBS.DS.'Model.php';
-//require_once LIBS.DS.'Session.php';
-//require_once LIBS.DS.'Sender.php';
-//require_once LIBS.DS.'Mail.php';
-//require_once LIBS.DS.'Pdf.php';
+include MODELS.DS.'modelVacataire.php';
+include MODELS.DS.'modelRespFormation.php';
+include MODELS.DS.'modelRespAdministratif.php';
+include MODELS.DS.'modelContGestion.php';
+include MODELS.DS.'modelRespFinancier.php';
 
 if(file_exists(ROOT.DS.'configuration'.DS.'conf.ini')){
   $dipatcher = new Dispatcher();
 }else{
   $dipatcher = new Dispatcher(true);
 }
-?>
