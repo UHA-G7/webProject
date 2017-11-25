@@ -30,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Responsables des Formations <a href="<?= URL_BASE ?>/RespFormation/add/"><button class="btn-default pull-right">Ajouter un Responsable de Formation</button></a>
+                            Liste des Responsables des Formations <a href="<?= URL_BASE ?>/RespFormation/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Responsable de Formation</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -41,9 +41,9 @@
                                             <th>Nom</th>
                                             <th>Prenom</th>
                                             <th>Adresse</th>
-                                            <th>Adresse</th>
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,7 @@
                                             <td><?= $l['respFormAdresse'] ?></td>
                                             <td><?= $l['respFormPhone'] ?></td>
                                             <td><?= $l['respFormEmail'] ?></td>
-                                            <td>
+                                            <td  class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerRespFormation(<?= $l['respFormId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/RespFormation/update?userId='.$l['respFormId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

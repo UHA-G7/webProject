@@ -30,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des vacataires <a href="<?= URL_BASE ?>/Vacataire/ajoutVacataire/"><button class="btn-default pull-right">Ajouter un vacataire</button></a>
+                            Liste des vacataires <a href="<?= URL_BASE ?>/Vacataire/ajoutVacataire/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un vacataire</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -41,9 +41,9 @@
                                             <th>Nom</th>
                                             <th>Prenom</th>
                                             <th>Adresse</th>
-                                            <th>Adresse</th>
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th class="<?= $classe?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,7 @@
                                             <td><?= $l['vacataireAdresse'] ?></td>
                                             <td><?= $l['vacatairePhone'] ?></td>
                                             <td><?= $l['vacataireEmail'] ?></td>
-                                            <td>
+                                            <td class="<?= $classe?>">
                                                 <button class="btn-danger" onclick="supprimerVac(<?= $l['vacataireId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/Vacataire/modifVacataire?vacId='.$l['vacataireId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

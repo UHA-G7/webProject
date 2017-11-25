@@ -6,9 +6,15 @@ class FaculteController {
 
     // fonction qui affiche le formulaire d'ajout d'une faculté
     public function ajoutFaculte() {
-        $sub_title = "Ajout d'une faculté";
-        $functionUrl="actionAjoutFaculte";
-        include_once VIEWS . DS . 'ajoutFaculte.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $sub_title = "Ajout d'une faculté";
+                $functionUrl = "actionAjoutFaculte";
+                include_once VIEWS . DS . 'ajoutFaculte.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données du formulaire d'ajout d'une faculté
@@ -17,7 +23,7 @@ class FaculteController {
 
     public function actionAjoutFaculte() {
         $nom = filter_input(INPUT_POST, 'facNom', FILTER_SANITIZE_STRING);
-        echo $nom."857";
+        echo $nom . "857";
         $m = new ModelFaculte();
         $m->addFac($nom);
         header('Location: ' . URL_BASE . '/Faculte/listFacultes');
@@ -30,9 +36,16 @@ class FaculteController {
      */
 
     public function listFacultes() {
-        $m = new ModelFaculte();
-        $list = $m->getAllFacs();
-        include_once VIEWS . DS . 'listFacultes.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelFaculte();
+            $list = $m->getAllFacs();
+            include_once VIEWS . DS . 'listFacultes.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -42,12 +55,19 @@ class FaculteController {
      */
 
     public function modiFaculte() {
-        $id = filter_input(INPUT_GET, 'facId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelFaculte();
-        $fac = $m->getFaculte($id);
-        $sub_title = "Modification d'une faculté";
-        $functionUrl="actionModiFaculte";
-        include_once VIEWS . DS . 'ajoutFaculte.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+
+                $id = filter_input(INPUT_GET, 'facId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelFaculte();
+                $fac = $m->getFaculte($id);
+                $sub_title = "Modification d'une faculté";
+                $functionUrl = "actionModiFaculte";
+                include_once VIEWS . DS . 'ajoutFaculte.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 

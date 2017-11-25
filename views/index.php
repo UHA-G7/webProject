@@ -10,7 +10,6 @@
 
     <body>
         <div id="wrapper">
-
             <?php include_once 'inc/header.php'; ?> 
             <div id="page-wrapper">
                 <div class="header"> 
@@ -23,8 +22,13 @@
 
                 </div>
                 <div id="page-inner">
-
-
+                     <?php //if(isset($message)):?>
+                   <!-- <div class="row message" id="message" >
+                        <div class="col-md-10 ">
+                            <?= $message; ?>
+                        </div>
+                    </div>-->
+                    <?php //endif; ?>
                     <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             <div class="panel panel-primary text-center no-boder blue">

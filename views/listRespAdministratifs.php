@@ -30,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Responsables Administratifs <a href="<?= URL_BASE ?>/RespAdministratif/add/"><button class="btn-default pull-right">Ajouter un Responsable Administratif</button></a>
+                            Liste des Responsables Administratifs <a href="<?= URL_BASE ?>/RespAdministratif/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Responsable Administratif</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -40,10 +40,10 @@
                                             <th>Identifient</th>
                                             <th>Nom</th>
                                             <th>Prenom</th>
-                                            <th>Adresse</th>
-                                            <th>Adresse</th>
+                                            <th>Adresse</th>                                            
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,7 @@
                                             <td><?= $l['respAdminAdresse'] ?></td>
                                             <td><?= $l['respAdminPhone'] ?></td>
                                             <td><?= $l['respAdminEmail'] ?></td>
-                                            <td>
+                                            <td class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerRespAdministratif(<?= $l['respAdminId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/RespAdministratif/update?userId='.$l['respAdminId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

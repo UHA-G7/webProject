@@ -29,7 +29,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des facultés <a href="<?= URL_BASE ?>/Faculte/ajoutFaculte/"><button class="btn-default pull-right">Ajouter une faculté</button></a>
+                            Liste des facultés <a href="<?= URL_BASE ?>/Faculte/ajoutFaculte/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter une faculté</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -38,7 +38,7 @@
                                         <tr>
                                             <th>Identifient</th>
                                             <th>Nom de la faculté</th>
-                                            <th>Action</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,7 +46,7 @@
                                        <tr class="gradeX">
                                             <td><?= $l['faculteId'] ?></td>
                                             <td><?= $l['faculteNom'] ?></td>
-                                            <td>
+                                            <td class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerFac(<?= $l['faculteId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/Faculte/modiFaculte?facId='.$l['faculteId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

@@ -4,9 +4,15 @@ class ContGestionController {
 
     // fonction qui affiche le formulaire d'ajout d'un Controleur Gestion
     public function add() {
-        $sub_title = "Ajout d'un Controleur Gestion";
-        $functionUrl = "doAdd";
-        include_once VIEWS . DS . 'ajoutContGestion.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $sub_title = "Ajout d'un Controleur Gestion";
+                $functionUrl = "doAdd";
+                include_once VIEWS . DS . 'ajoutContGestion.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     public function doAdd() {
@@ -43,9 +49,16 @@ class ContGestionController {
      */
 
     public function lists() {
-        $m = new ModelContGestion();
-        $list = $m->getAll();
-        include_once VIEWS . DS . 'listContGestions.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelContGestion();
+            $list = $m->getAll();
+            include_once VIEWS . DS . 'listContGestions.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -55,12 +68,18 @@ class ContGestionController {
      */
 
     public function update() {
-        $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelContGestion();
-        $ctrl = $m->getOne($id);
-        $sub_title = "Modification d'un Controleur Gestion";
-        $functionUrl = "doUpdate";
-        include_once VIEWS . DS . 'ajoutContGestion.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelContGestion();
+                $ctrl = $m->getOne($id);
+                $sub_title = "Modification d'un Controleur Gestion";
+                $functionUrl = "doUpdate";
+                include_once VIEWS . DS . 'ajoutContGestion.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 
@@ -84,7 +103,7 @@ class ContGestionController {
         } else {
             $message = "Une erreur n'a pas permis de mettre a jour le Controleur Gestion";
             var_dump($message);
-          //die();
+            //die();
         }
 
         header('Location: ' . URL_BASE . '/ContGestion/lists');

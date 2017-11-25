@@ -1,5 +1,6 @@
 
 <link href="<?= CSS ?>/bootstrap.css" rel="stylesheet" />
+<link href="<?= CSS ?>/style.css" rel="stylesheet" />
 <!-- FontAwesome Styles-->
 <link href="<?= CSS ?>/font-awesome.css" rel="stylesheet" />
 <!-- Morris Chart Styles-->

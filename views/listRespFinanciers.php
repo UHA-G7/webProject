@@ -30,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Responsables Financiers  <a href="<?= URL_BASE ?>/RespFinancier/add/"><button class="btn-default pull-right">Ajouter un Responsable Financier</button></a>
+                            Liste des Responsables Financiers  <a href="<?= URL_BASE ?>/RespFinancier/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Responsable Financier</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -41,9 +41,9 @@
                                             <th>Nom</th>
                                             <th>Prenom</th>
                                             <th>Adresse</th>
-                                            <th>Adresse</th>
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,7 @@
                                             <td><?= $l['respFinAdresse'] ?></td>
                                             <td><?= $l['respFinPhone'] ?></td>
                                             <td><?= $l['respFinEmail'] ?></td>
-                                            <td>
+                                            <td  class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerRespFinancier(<?= $l['respFinId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/RespFinancier/update?userId='.$l['respFinId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

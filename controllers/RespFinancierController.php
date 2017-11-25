@@ -4,9 +4,15 @@ class RespFinancierController {
 
     // fonction qui affiche le formulaire d'ajout d'un Responsable Financier
     public function add() {
-        $sub_title = "Ajout d'un Responsable Financier";
-        $functionUrl = "doAdd";
-        include_once VIEWS . DS . 'ajoutRespFinancier.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $sub_title = "Ajout d'un Responsable Financier";
+                $functionUrl = "doAdd";
+                include_once VIEWS . DS . 'ajoutRespFinancier.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     public function doAdd() {
@@ -43,9 +49,16 @@ class RespFinancierController {
      */
 
     public function lists() {
-        $m = new ModelRespFinancier();
-        $list = $m->getAll();
-        include_once VIEWS . DS . 'listRespFinanciers.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelRespFinancier();
+            $list = $m->getAll();
+            include_once VIEWS . DS . 'listRespFinanciers.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -55,12 +68,19 @@ class RespFinancierController {
      */
 
     public function update() {
-        $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelRespFinancier();
-        $resp = $m->getOne($id);
-        $sub_title = "Modification d'un Responsable Financier";
-        $functionUrl = "doUpdate";
-        include_once VIEWS . DS . 'ajoutRespFinancier.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+
+                $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelRespFinancier();
+                $resp = $m->getOne($id);
+                $sub_title = "Modification d'un Responsable Financier";
+                $functionUrl = "doUpdate";
+                include_once VIEWS . DS . 'ajoutRespFinancier.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 
@@ -84,7 +104,7 @@ class RespFinancierController {
         } else {
             $message = "Une erreur n'a pas permis de mettre a jour le Responsable Financier";
             var_dump($message);
-          //die();
+            //die();
         }
 
         header('Location: ' . URL_BASE . '/RespFinancier/lists');

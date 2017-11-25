@@ -30,6 +30,7 @@ class ConnexionController {
             if ($m->logincheck($login, $pwd)) {
                 //le login/password est bon - initialisation d'une variable de session
                 $_SESSION['login'] = $login;
+                $_SESSION['profile']=$table;
                 header('Location: ' . URL_BASE);
             } else {
                 //le login/password n'est pas bon

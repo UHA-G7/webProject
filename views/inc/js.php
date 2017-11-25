@@ -19,7 +19,13 @@
 
 <script type="text/javascript">
 
-   
+    var timePeriodInMs = 8000;
+
+    setTimeout(function ()
+    {
+        document.getElementById("message").style.display = "none";
+    },
+            timePeriodInMs);
     function supprimerRespFinancier(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce responsable Financier ?"))
@@ -27,7 +33,8 @@
             location.href = "<?= URL_BASE ?>/RespFinancier/delete?userId=" + id;
         }
         return  false;
-    };
+    }
+    ;
     function supprimerContGestion(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce Controleur Gestion ?"))
@@ -35,7 +42,8 @@
             location.href = "<?= URL_BASE ?>/ContGestion/delete?userId=" + id;
         }
         return  false;
-    };
+    }
+    ;
     function supprimerRespAdministratif(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce responsable administratif ?"))
@@ -43,7 +51,8 @@
             location.href = "<?= URL_BASE ?>/RespAdministratif/delete?userId=" + id;
         }
         return  false;
-    };
+    }
+    ;
     function supprimerRespFormation(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce responsable de Formation ?"))
@@ -51,7 +60,8 @@
             location.href = "<?= URL_BASE ?>/RespFormation/delete?userId=" + id;
         }
         return  false;
-    };
+    }
+    ;
     function supprimerFac(id) {
 
         if (confirm("Voulez vous vraiment supprimer cette faculté ?"))
@@ -60,7 +70,8 @@
         }
         return  false;
     }
-    ;function supprimerVac(id) {
+    ;
+    function supprimerVac(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce Vacataire ?"))
         {

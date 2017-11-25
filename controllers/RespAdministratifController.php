@@ -4,11 +4,17 @@ class RespAdministratifController {
 
     // fonction qui affiche le formulaire d'ajout d'un Responsable Administratifs
     public function add() {
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
         $mform = new ModelFormation();
         $forms = $mform->getAllFormations();
         $sub_title = "Ajout d'un Responsable Administratif";
         $functionUrl = "doAdd";
         include_once VIEWS . DS . 'ajoutRespAdministratif.php';
+        } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     public function doAdd() {
@@ -58,6 +64,9 @@ class RespAdministratifController {
      */
 
     public function update() {
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+    
         $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
         $m = new ModelRespAdministratif();
         $resp = $m->getOne($id);
@@ -66,6 +75,10 @@ class RespAdministratifController {
         $sub_title = "Modification d'un Responsable Administratif";
         $functionUrl = "doUpdate";
         include_once VIEWS . DS . 'ajoutRespAdministratif.php';
+        } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 

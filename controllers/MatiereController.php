@@ -6,11 +6,17 @@ class MatiereController {
 
     // fonction qui affiche le formulaire d'ajout d'une matière
     public function ajoutMatiere() {
-        $functionUrl="actionAjoutMatiere";
-        $sub_title = "Ajout d'une matière";
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        include_once VIEWS . DS . 'ajoutMatiere.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $functionUrl = "actionAjoutMatiere";
+                $sub_title = "Ajout d'une matière";
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                include_once VIEWS . DS . 'ajoutMatiere.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données du formulaire d'ajout d'une matière
@@ -32,9 +38,16 @@ class MatiereController {
      */
 
     public function listMatieres() {
-        $m = new ModelMatiere();
-        $list = $m->getAllMatieres();
-        include_once VIEWS . DS . 'listMatieres.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelMatiere();
+            $list = $m->getAllMatieres();
+            include_once VIEWS . DS . 'listMatieres.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -44,14 +57,21 @@ class MatiereController {
      */
 
     public function modifMatiere() {
-        $id = filter_input(INPUT_GET, 'matId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelMatiere();
-        $mat = $m->getMatiere($id);
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        $functionUrl="actionModifMatiere";
-        $sub_title = "Modification d'une matière";
-        include_once VIEWS . DS . 'ajoutMatiere.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+
+                $id = filter_input(INPUT_GET, 'matId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelMatiere();
+                $mat = $m->getMatiere($id);
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                $functionUrl = "actionModifMatiere";
+                $sub_title = "Modification d'une matière";
+                include_once VIEWS . DS . 'ajoutMatiere.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 

@@ -29,7 +29,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des formations <a href="<?= URL_BASE ?>/Formation/ajoutFormation/"><button class="btn-default pull-right">Ajouter une formation</button></a>
+                            Liste des formations <a href="<?= URL_BASE ?>/Formation/ajoutFormation/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter une formation</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -38,7 +38,7 @@
                                         <tr>
                                             <th>Identifient</th>
                                             <th>Nom de la formation</th>
-                                            <th>Action</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,7 +46,7 @@
                                        <tr class="gradeX">
                                             <td><?= $l['formationId'] ?></td>
                                             <td><?= $l['formationNom'] ?></td>
-                                            <td>
+                                            <td class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerFormation(<?= $l['formationId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/Formation/modiFormation?formaId='.$l['formationId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

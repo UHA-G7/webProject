@@ -8,7 +8,10 @@
 class IndexController{
   
   public function index() {
-      if (isset($_SESSION['login'])) {
+      if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+          if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe="hide";
+            }
             $mfa = new ModelFaculte();
             $mfo = new ModelFormation();
             $mma = new ModelMatiere();

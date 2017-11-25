@@ -4,11 +4,17 @@ class RespFormationController {
 
     // fonction qui affiche le formulaire d'ajout d'un Responsable Formations
     public function add() {
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        $sub_title = "Ajout d'un Responsable Formation";
-        $functionUrl = "doAdd";
-        include_once VIEWS . DS . 'ajoutRespFormation.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                $sub_title = "Ajout d'un Responsable Formation";
+                $functionUrl = "doAdd";
+                include_once VIEWS . DS . 'ajoutRespFormation.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     public function doAdd() {
@@ -46,9 +52,16 @@ class RespFormationController {
      */
 
     public function lists() {
-        $m = new ModelRespFormation();
-        $list = $m->getAll();
-        include_once VIEWS . DS . 'listRespFormations.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelRespFormation();
+            $list = $m->getAll();
+            include_once VIEWS . DS . 'listRespFormations.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -58,14 +71,21 @@ class RespFormationController {
      */
 
     public function update() {
-        $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelRespFormation();
-        $resp = $m->getOne($id);
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        $sub_title = "Modification d'un Responsable Formation";
-        $functionUrl = "doUpdate";
-        include_once VIEWS . DS . 'ajoutRespFormation.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+
+                $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelRespFormation();
+                $resp = $m->getOne($id);
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                $sub_title = "Modification d'un Responsable Formation";
+                $functionUrl = "doUpdate";
+                include_once VIEWS . DS . 'ajoutRespFormation.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 
@@ -90,7 +110,7 @@ class RespFormationController {
         } else {
             $message = "Une erreur n'a pas permis de mettre a jour le Responsable Formation";
             var_dump($message);
-          // die();
+            // die();
         }
 
         header('Location: ' . URL_BASE . '/RespFormation/lists');

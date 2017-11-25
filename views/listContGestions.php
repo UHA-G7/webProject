@@ -30,7 +30,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Controleurs Gestion  <a href="<?= URL_BASE ?>/ContGestion/add/"><button class="btn-default pull-right">Ajouter un Controleur Gestion</button></a>
+                            Liste des Controleurs Gestion  <a href="<?= URL_BASE ?>/ContGestion/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Controleur Gestion</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -40,10 +40,10 @@
                                             <th>Identifient</th>
                                             <th>Nom</th>
                                             <th>Prenom</th>
-                                            <th>Adresse</th>
-                                            <th>Adresse</th>
+                                            <th>Adresse</th>                                           
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,7 +55,7 @@
                                             <td><?= $l['controleurAdresse'] ?></td>
                                             <td><?= $l['controleurPhone'] ?></td>
                                             <td><?= $l['controleurEmail'] ?></td>
-                                            <td>
+                                            <td class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerContGestion(<?= $l['controleurId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/ContGestion/update?userId='.$l['controleurId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>

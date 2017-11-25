@@ -5,11 +5,17 @@
 class FormationController {
 
     public function ajoutFormation() {
-        $mfac = new ModelFaculte();
-        $facs = $mfac->getAllFacs();
-        $functionUrl="actionAjoutFormation";
-        $sub_title = "Ajout d'une formation";
-        include_once VIEWS . DS . 'ajoutformation.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+                $mfac = new ModelFaculte();
+                $facs = $mfac->getAllFacs();
+                $functionUrl = "actionAjoutFormation";
+                $sub_title = "Ajout d'une formation";
+                include_once VIEWS . DS . 'ajoutformation.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données du formulaire d'ajout d'une formation
@@ -31,9 +37,16 @@ class FormationController {
      */
 
     public function listFormations() {
-        $m = new ModelFormation();
-        $list = $m->getAllFormations();
-        include_once VIEWS . DS . 'listformations.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelFormation();
+            $list = $m->getAllFormations();
+            include_once VIEWS . DS . 'listformations.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -43,14 +56,21 @@ class FormationController {
      */
 
     public function modiFormation() {
-        $id = filter_input(INPUT_GET, 'formaId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelFormation();
-        $form = $m->getFormation($id);
-        $mfac = new ModelFaculte();
-        $facs = $mfac->getAllFacs();
-        $functionUrl="actionModiFormation";
-        $sub_title = "Modification d'une formation";
-        include_once VIEWS . DS . 'ajoutFormation.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+
+                $id = filter_input(INPUT_GET, 'formaId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelFormation();
+                $form = $m->getFormation($id);
+                $mfac = new ModelFaculte();
+                $facs = $mfac->getAllFacs();
+                $functionUrl = "actionModiFormation";
+                $sub_title = "Modification d'une formation";
+                include_once VIEWS . DS . 'ajoutFormation.php';
+            } else {
+                header('Location: ' . URL_BASE);
+            }
+        }
     }
 
     /* fonction qui met en relation les données 

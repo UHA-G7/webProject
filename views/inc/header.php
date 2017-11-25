@@ -45,7 +45,7 @@
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Vacataires <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li>
+                            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                                 <a href="<?= URL_BASE ?>/Vacataire/ajoutVacataire/">Ajouter un vacataire <i class="fa fa-plus "></i></a>
                             </li>
                             <li>
@@ -57,7 +57,7 @@
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Resp. Formations <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li>
+                            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                                 <a href="<?= URL_BASE ?>/RespFormation/add/">Ajouter <i class="fa fa-plus"></i></a>
                             </li>
                             <li>
@@ -69,7 +69,7 @@
                      <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Resp. Administratifs <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li>
+                            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                                 <a href="<?= URL_BASE ?>/RespAdministratif/add/">Ajouter <i class="fa fa-plus"></i></a>
                             </li>
                             <li>
@@ -81,7 +81,7 @@
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Resp. Financiers <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li>
+                            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                                 <a href="<?= URL_BASE ?>/RespFinancier/add/">Ajouter <i class="fa fa-plus"></i></a>
                             </li>
                             <li>
@@ -93,7 +93,7 @@
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Controleurs Gestion <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li>
+                            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                                 <a href="<?= URL_BASE ?>/ContGestion/add/">Ajouter <i class="fa fa-plus"></i></a>
                             </li>
                             <li>
@@ -109,7 +109,7 @@
             <li>
                 <a href="#"><i class="fa fa-sitemap"></i> Facultés<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                         <a href="<?= URL_BASE ?>/Faculte/ajoutFaculte/">Ajouter une faculté</a>
                     </li>
                     <li>
@@ -121,7 +121,7 @@
             <li>
                 <a href=""><i class="fa fa-sitemap"></i> Formations<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                         <a href="<?= URL_BASE ?>/Formation/ajoutFormation/">Ajouter une formation</a>
                     </li>
                     <li>
@@ -133,7 +133,7 @@
             <li>
                 <a href="#"><i class="fa fa-sitemap"></i> Matières<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                         <a href="<?= URL_BASE ?>/Matiere/ajoutMatiere/">Ajouter une matières</a>
                     </li>
                     <li>
