@@ -5,7 +5,7 @@ class ContGestionController {
     // fonction qui affiche le formulaire d'ajout d'un Controleur Gestion
     public function add() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $sub_title = "Ajout d'un Controleur Gestion";
                 $functionUrl = "doAdd";
                 include_once VIEWS . DS . 'ajoutContGestion.php';
@@ -50,7 +50,7 @@ class ContGestionController {
 
     public function lists() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
             $m = new ModelContGestion();
@@ -69,7 +69,7 @@ class ContGestionController {
 
     public function update() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
                 $m = new ModelContGestion();
                 $ctrl = $m->getOne($id);
@@ -79,7 +79,9 @@ class ContGestionController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les données 

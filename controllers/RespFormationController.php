@@ -5,7 +5,7 @@ class RespFormationController {
     // fonction qui affiche le formulaire d'ajout d'un Responsable Formations
     public function add() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $mform = new ModelFormation();
                 $forms = $mform->getAllFormations();
                 $sub_title = "Ajout d'un Responsable Formation";
@@ -53,7 +53,7 @@ class RespFormationController {
 
     public function lists() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
             $m = new ModelRespFormation();
@@ -72,7 +72,7 @@ class RespFormationController {
 
     public function update() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
 
                 $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
                 $m = new ModelRespFormation();
@@ -85,7 +85,9 @@ class RespFormationController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les données 

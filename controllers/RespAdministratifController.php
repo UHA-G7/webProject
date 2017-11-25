@@ -5,13 +5,13 @@ class RespAdministratifController {
     // fonction qui affiche le formulaire d'ajout d'un Responsable Administratifs
     public function add() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        $sub_title = "Ajout d'un Responsable Administratif";
-        $functionUrl = "doAdd";
-        include_once VIEWS . DS . 'ajoutRespAdministratif.php';
-        } else {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                $sub_title = "Ajout d'un Responsable Administratif";
+                $functionUrl = "doAdd";
+                include_once VIEWS . DS . 'ajoutRespAdministratif.php';
+            } else {
                 header('Location: ' . URL_BASE);
             }
         }
@@ -52,9 +52,16 @@ class RespAdministratifController {
      */
 
     public function lists() {
-        $m = new ModelRespAdministratif();
-        $list = $m->getAll();
-        include_once VIEWS . DS . 'listRespAdministratifs.php';
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
+                $classe = "hide";
+            }
+            $m = new ModelRespAdministratif();
+            $list = $m->getAll();
+            include_once VIEWS . DS . 'listRespAdministratifs.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
     }
 
     /* fonction qui met en relation les donnéss 
@@ -65,22 +72,24 @@ class RespAdministratifController {
 
     public function update() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
-    
-        $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
-        $m = new ModelRespAdministratif();
-        $resp = $m->getOne($id);
-        $mform = new ModelFormation();
-        $forms = $mform->getAllFormations();
-        $sub_title = "Modification d'un Responsable Administratif";
-        $functionUrl = "doUpdate";
-        include_once VIEWS . DS . 'ajoutRespAdministratif.php';
-        } else {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
+
+                $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
+                $m = new ModelRespAdministratif();
+                $resp = $m->getOne($id);
+                $mform = new ModelFormation();
+                $forms = $mform->getAllFormations();
+                $sub_title = "Modification d'un Responsable Administratif";
+                $functionUrl = "doUpdate";
+                include_once VIEWS . DS . 'ajoutRespAdministratif.php';
+            } else {
                 header('Location: ' . URL_BASE);
             }
+        } else {
+            header('Location: ' . URL_BASE);
         }
     }
-
+    
     /* fonction qui met en relation les données 
      * renvoyées par le formulaire de modification d'un Responsable Administratif
      * et la fonction update() du modeèle Responsable Administratif
@@ -103,7 +112,7 @@ class RespAdministratifController {
         } else {
             $message = "Une erreur n'a pas permis de mettre a jour le Responsable Administratif";
             var_dump($message);
-          // die();
+            // die();
         }
 
         header('Location: ' . URL_BASE . '/RespAdministratif/lists');

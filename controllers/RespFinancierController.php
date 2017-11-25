@@ -5,7 +5,7 @@ class RespFinancierController {
     // fonction qui affiche le formulaire d'ajout d'un Responsable Financier
     public function add() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $sub_title = "Ajout d'un Responsable Financier";
                 $functionUrl = "doAdd";
                 include_once VIEWS . DS . 'ajoutRespFinancier.php';
@@ -50,7 +50,7 @@ class RespFinancierController {
 
     public function lists() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
             $m = new ModelRespFinancier();
@@ -69,7 +69,7 @@ class RespFinancierController {
 
     public function update() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
 
                 $id = filter_input(INPUT_GET, 'userId', FILTER_SANITIZE_NUMBER_INT);
                 $m = new ModelRespFinancier();
@@ -80,7 +80,9 @@ class RespFinancierController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les données 

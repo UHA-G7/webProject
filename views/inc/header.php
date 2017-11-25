@@ -13,15 +13,16 @@
 
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+               <?= ' '.$_SESSION['profile']; ?> <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user"></i> User Profile</a>
+                
+                <li><a href="#"><i class="fa fa-user"></i> <strong><?= $_SESSION['nom'].' '.$_SESSION['prenom']; ?></strong></a>
                 </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li><a href="<?= URL_BASE ?>/Connexion/updatePwd?userId=<?= $_SESSION['id']?>"><i class="fa fa-gear fa-fw"></i> Changer de Mot de passe</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?= URL_BASE ?>/Connexion/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<?= URL_BASE ?>/Connexion/logout"><i class="fa fa-sign-out fa-fw"></i> Deconnexion</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->

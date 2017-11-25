@@ -10,16 +10,13 @@
 class ModelRespFormation{
     public function logincheck($uname, $upwd) {
         $bdd = Connexion::getInstance();
-        $sql = "SELECT respFormEmail, respFormPasse FROM responsableformation WHERE respFormEmail=? AND respFormPasse=?";
+        $sql = "SELECT * FROM responsableformation WHERE respFormEmail=? AND respFormPasse=?";
         $req = $bdd->prepare($sql);
         $req->bindParam(1, $uname, PDO::PARAM_STR);
         $req->bindParam(2, $upwd, PDO::PARAM_STR);
         $req->execute();
-        $res = $req->fetchAll(PDO::FETCH_OBJ);
-        if (count($res) === 1)
-            return true;
-        else
-            return false;
+        $res = $req->fetchAll();
+        return $res;
     }
     // fonction qui ajoute un respondable formation dans la base de données
     public function add($nom,$prenom,$adresse,$phone,$email,$pwd,$formation) {
@@ -78,7 +75,16 @@ class ModelRespFormation{
         ));
         
     }
-
+    // fonction qui met à jour le mot de passe 
+    public function updateUserPwd($pwd, $id) {
+        $bdd = Connexion::getInstance();
+        $req = $bdd->prepare('UPDATE responsableformation SET respFormPasse = :pass WHERE respFormId = :id');
+        if ($req->execute(array('pass' => $pwd, 'id' => $id))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     // fonction qui supprime  un responsable formation de la base de données
     public function delete($id) {
         $bdd = Connexion::getInstance();

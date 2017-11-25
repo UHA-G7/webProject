@@ -11,16 +11,13 @@ class ModelVacataire {
 
     public function logincheck($uname, $upwd) {
         $bdd = Connexion::getInstance();
-        $sql = "SELECT vacataireEmail, vacatairePasse FROM vacataire WHERE vacataireEmail=? AND vacatairePasse=?";
+        $sql = "SELECT * FROM vacataire WHERE vacataireEmail=? AND vacatairePasse=?";
         $req = $bdd->prepare($sql);
         $req->bindParam(1, $uname, PDO::PARAM_STR);
         $req->bindParam(2, $upwd, PDO::PARAM_STR);
         $req->execute();
-        $res = $req->fetchAll(PDO::FETCH_OBJ);
-        if (count($res) === 1)
-            return true;
-        else
-            return false;
+        $res = $req->fetchAll();
+        return $res;
     }
 
     // fonction qui ajoute un vacataire dans la base de données
@@ -59,7 +56,7 @@ class ModelVacataire {
         return $vac;
     }
 
-    // fonction qui met à jour les information d'une vacataire
+    // fonction qui met à jour les information d'un vacataire
     public function update($nom, $prenom, $adresse, $phone, $emp, $email, $pwd, $id) {
         $bdd = Connexion::getInstance();
         $req = $bdd->prepare('UPDATE vacataire SET vacataireNom = :nom ,vacatairePrenom = :prenom ,'
@@ -76,7 +73,16 @@ class ModelVacataire {
             'id' => $id
         ));
     }
-
+    // fonction qui met à jour le mot de passe d'un vacataire
+    public function updateUserPwd($pwd, $id) {
+        $bdd = Connexion::getInstance();
+        $req = $bdd->prepare('UPDATE vacataire SET vacatairePasse = :pass WHERE vacataireId = :id');
+        if ($req->execute(array('pass' => $pwd, 'id' => $id))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     // fonction qui supprime  une vacataire de la base de données
     public function delete($id) {
         $bdd = Connexion::getInstance();

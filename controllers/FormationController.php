@@ -6,7 +6,7 @@ class FormationController {
 
     public function ajoutFormation() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $mfac = new ModelFaculte();
                 $facs = $mfac->getAllFacs();
                 $functionUrl = "actionAjoutFormation";
@@ -38,7 +38,7 @@ class FormationController {
 
     public function listFormations() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
             $m = new ModelFormation();
@@ -57,7 +57,7 @@ class FormationController {
 
     public function modiFormation() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
 
                 $id = filter_input(INPUT_GET, 'formaId', FILTER_SANITIZE_NUMBER_INT);
                 $m = new ModelFormation();
@@ -70,7 +70,9 @@ class FormationController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les données 

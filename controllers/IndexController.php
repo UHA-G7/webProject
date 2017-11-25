@@ -9,8 +9,11 @@ class IndexController{
   
   public function index() {
       if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-          if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+          if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe="hide";
+            }
+            if (isset($_GET['msg'])) {
+                $message = filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING);
             }
             $mfa = new ModelFaculte();
             $mfo = new ModelFormation();

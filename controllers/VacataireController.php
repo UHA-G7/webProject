@@ -5,7 +5,7 @@ class VacataireController {
     // fonction qui affiche le formulaire d'ajout d'une matière
     public function ajoutVacataire() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $sub_title = "Ajout d'un vacataire";
                 $functionUrl = "doAddVacataire";
                 include_once VIEWS . DS . 'ajoutVacataire.php';
@@ -50,7 +50,7 @@ class VacataireController {
 
     public function listVacataires() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] != "RespFormation") && ($_SESSION['profile'] != "RespAdministratif")) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
             $m = new ModelVacataire();
@@ -69,7 +69,7 @@ class VacataireController {
 
     public function modifVacataire() {
         if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
-            if (($_SESSION['profile'] == "RespFormation") || ($_SESSION['profile'] == "RespAdministratif")) {
+            if (($_SESSION['profile'] == "Responsable Formation") || ($_SESSION['profile'] == "Responsable Administratif")) {
                 $id = filter_input(INPUT_GET, 'vacId', FILTER_SANITIZE_NUMBER_INT);
                 $tableName = filter_input(INPUT_GET, 'profile', FILTER_SANITIZE_STRING);
                 $m = new ModelVacataire();
@@ -80,7 +80,9 @@ class VacataireController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les données 
