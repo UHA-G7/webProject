@@ -25,38 +25,43 @@ class ConnexionController {
             $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
             $pwd = filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_STRING);
             $table = filter_input(INPUT_POST, 'profile', FILTER_SANITIZE_STRING);
+            
             //Vérification du couple login/password
             $model = 'model' . ucfirst($table);
             $m = new $model();
             $_SESSION['model'] = $model;
             $usr = $m->logincheck($login, $pwd);
+            
             if (count($usr) == 1) {
                 //le login/password est bon - initialisation d'une variable de session
                 switch ($table) {
-                    case $table:"RespFormation";
+                    case "RespFormation" :
                         $_SESSION['profile'] = "Responsable Formation";
+                        
                         break;
-                    case $table:"RespAdministratif";
+                    case "RespAdministratif" :
                         $_SESSION['profile'] = "Responsable Administratif";
                         break;
-                    case $table:"ContGestion";
+                    case "ContGestion" :
                         $_SESSION['profile'] = "Controleur Gestion";
                         break;
-                    case $table:"RespFinancier";
+                    case "RespFinancier" :
                         $_SESSION['profile'] = "Responsable Financier";
                         break;
-                    case $table:"Vacataire";
-                        $_SESSION['profile'] = $table;
+                    case "Vacataire" :
+                        $_SESSION['profile'] = "Vacataire";
                         break;
                     default:
                         break;
                 }
+                
                 foreach ($usr as $u) {
                     $_SESSION['id'] = $u[0];
                     $_SESSION['nom'] = $u[1];
                     $_SESSION['prenom'] = $u[2];
                 }
                 $_SESSION['login'] = $login;
+                
                 header('Location: ' . URL_BASE);
             } else {
                 //le login/password n'est pas bon

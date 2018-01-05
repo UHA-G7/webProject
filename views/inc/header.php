@@ -10,7 +10,18 @@
     </div>
 
     <ul class="nav navbar-top-links navbar-right">
-
+        <li class="dropdown <?php if($_SESSION['profile']!="Vacataire"){ echo 'hide' ;}?>">
+            <a href="#" data-toggle="dropdown" ria-expanded="false" class="dropdown-toggle"> Documents <i class="fa fa-file-o"></i> </a>
+            <ul class="dropdown-menu">
+                <li >
+                    <a href="<?= URL_BASE ?>/Documents/add/">Ajouter un document <i class="fa fa-plus "></i></a>
+                </li>
+                <li >
+                    <a href="<?= URL_BASE ?>/Documents/documentsVacataire?id=<?= $_SESSION['id']?>">Mes documents <i class="fa fa-eye "></i></a>
+                </li>
+                
+            </ul>
+        </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                <?= ' '.$_SESSION['profile']; ?> <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -52,6 +63,7 @@
                             <li>
                                 <a href="<?= URL_BASE ?>/Vacataire/listVacataires/">Liste des vacataires <i class="fa fa-eye "></i></a>
                             </li>
+                            
 
                         </ul>
                     </li>
@@ -104,7 +116,18 @@
                         </ul>
                     </li>
 
+                    <li class="<?php if(isset($classe ) || ($_SESSION['profile']=="Vacataire")){ echo $classe ;}?>">
+                       <a href="#" ><i class="fa fa-sitemap"></i> Documents <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li >
+                                <a href="<?= URL_BASE ?>/Documents/add/">Ajouter un document <i class="fa fa-plus "></i></a>
+                            </li>
+                            <li >
+                                <a href="<?= URL_BASE ?>/Documents/lists/">Tous les documents <i class="fa fa-eye "></i></a>
+                            </li>
 
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -139,6 +162,42 @@
                     </li>
                     <li>
                         <a href="<?= URL_BASE ?>/Matiere/listMatieres/">Liste des matières</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-sitemap"></i>Remuneration<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
+                        <a href="<?= URL_BASE ?>/Remuneration/ajoutRemuneration/">Ajouter une remuneration</a>
+                    </li>
+                    <li>
+                        <a href="<?= URL_BASE ?>/Remuneration/listRemunerations/">Liste des remunerations</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-sitemap"></i>Type de Cours<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
+                        <a href="<?= URL_BASE ?>/TypeCours/ajoutTypeCours/">Ajouter un type de cours</a>
+                    </li>
+                    <li>
+                        <a href="<?= URL_BASE ?>/TypeCours/listTypeCours/">Liste des type de cours</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-sitemap"></i>Cours<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
+                        <a href="<?= URL_BASE ?>/Cours/ajoutCours/">Ajouter un cours</a>
+                    </li>
+                    <li>
+                        <a href="<?= URL_BASE ?>/Cours/listCours/">Liste des cours</a>
                     </li>
 
                 </ul>

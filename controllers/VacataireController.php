@@ -12,7 +12,9 @@ class VacataireController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }
+        }else {
+                header('Location: ' . URL_BASE);
+            }
     }
 
     public function doAddVacataire() {
@@ -57,8 +59,8 @@ class VacataireController {
             $list = $m->getAll();
             include_once VIEWS . DS . 'listVacataires.php';
         } else {
-            include_once VIEWS . DS . 'connexion.php';
-        }
+                header('Location: ' . URL_BASE);
+            }
     }
 
     /* fonction qui met en relation les donnéss 

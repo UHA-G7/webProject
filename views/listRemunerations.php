@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>UHA: Gestion des Vacataires</title>
+        <title>UHA: Gestion dees vacataires</title>
         <?php include_once 'inc/top.php'; ?>  
 
     </head>
@@ -16,12 +16,11 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        UHA <small>Gestion des Vacataires</small>
+                        UHA <small>Gestion des vacataires</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
-                        <li><a href="#">Utilisateurs</a></li>
-                        <li class="active"><a href="#">Responsables Administratifs</a></li>
+                        <li><a href="#">Remuneration</a></li>
                         
                     </ol> 
 
@@ -30,7 +29,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Responsables Administratifs <a href="<?= URL_BASE ?>/RespAdministratif/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Responsable Administratif</button></a>
+                            Liste des Remunerations <a href="<?= URL_BASE ?>/Remuneration/ajoutRemuneration/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter une rémunearation</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -38,35 +37,24 @@
                                     <thead>
                                         <tr>
                                             <th>Identifient</th>
-                                            <th>Nom</th>
-                                            <th>Prenom</th>
-                                            <th>Adresse</th>                                            
-                                            <th>Phone</th>
-                                            <th>E-mail</th>
-                                             <th>Formation</th>
+                                            <th>Date de debut</th>
+                                            <th>Date de fin</th>
+                                            <th>Responsable Financier</th>
+                                            <th>Controleur de gestion</th>
                                             <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                      <?php foreach ($list as $l) {?>  
                                        <tr class="gradeX">
-                                            <td><?= $l['respAdminId'] ?></td>
-                                            <td><?= $l['respAdminNom'] ?></td>
-                                            <td><?= $l['respAdminPrenom'] ?></td>
-                                            <td><?= $l['respAdminAdresse'] ?></td>
-                                            <td><?= $l['respAdminPhone'] ?></td>
-                                            <td><?= $l['respAdminEmail'] ?></td>
-                                            <td>
-                                                <?php foreach($forma as $fo){
-                                                    if($l['formationId']==$fo['formationId'])
-                                                            {
-                                                                echo $fo['formationNom'];
-                                                            
-                                                            }} ?>
-                                            </td>
+                                            <td><?= $l['remunerationId'] ?></td>
+                                            <td><?= $l['dateD'] ?></td>
+                                            <td><?= $l['dateF'] ?></td>
+                                            <td><?php $m = new ModelRespFinancier(); $r = $m->getOne($l['respFinId']); echo ($r[0]['respFinNom'])  ?></td>
+                                            <td><?php $m = new ModelContGestion(); $r = $m->getOne($l['controleurId']); echo ($r[0]['controleurNom']) ?></td>
                                             <td class="<?php if(isset($classe)){ echo $classe ;}?>">
-                                                <button class="btn-danger" onclick="supprimerRespAdministratif(<?= $l['respAdminId']?>)">Supprimer</button>
-                                                <a href="<?= URL_BASE.'/RespAdministratif/update?userId='.$l['respAdminId']?>"><button class="btn-default">Modifier</button></a>
+                                                <button class="btn-danger" onclick="supprimerRemuneration(<?= $l['remunerationId']?>)">Supprimer</button>
+                                                <a href="<?= URL_BASE.'/Remuneration/modifRenumeration?remunerationId='.$l['remunerationId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>
                                             
                                         </tr>

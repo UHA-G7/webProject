@@ -57,7 +57,9 @@ class RespAdministratifController {
                 $classe = "hide";
             }
             $m = new ModelRespAdministratif();
+            $mF= new ModelFormation();
             $list = $m->getAll();
+            $forma= $mF->getAllFormations();
             include_once VIEWS . DS . 'listRespAdministratifs.php';
         } else {
             include_once VIEWS . DS . 'connexion.php';

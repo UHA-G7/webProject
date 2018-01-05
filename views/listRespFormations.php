@@ -43,6 +43,7 @@
                                             <th>Adresse</th>
                                             <th>Phone</th>
                                             <th>E-mail</th>
+                                            <th>Formation</th>
                                             <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
@@ -55,6 +56,14 @@
                                             <td><?= $l['respFormAdresse'] ?></td>
                                             <td><?= $l['respFormPhone'] ?></td>
                                             <td><?= $l['respFormEmail'] ?></td>
+                                            <td>
+                                                <?php foreach($forma as $fo){
+                                                    if($l['formationId']==$fo['formationId'])
+                                                            {
+                                                                echo $fo['formationNom'];
+                                                            
+                                                            }} ?>
+                                            </td>
                                             <td  class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerRespFormation(<?= $l['respFormId']?>)">Supprimer</button>
                                                 <a href="<?= URL_BASE.'/RespFormation/update?userId='.$l['respFormId']?>"><button class="btn-default">Modifier</button></a>

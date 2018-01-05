@@ -41,6 +41,11 @@ include MODELS.DS.'modelRespFormation.php';
 include MODELS.DS.'modelRespAdministratif.php';
 include MODELS.DS.'modelContGestion.php';
 include MODELS.DS.'modelRespFinancier.php';
+include MODELS.DS.'modelCours.php';
+include MODELS.DS.'modelRemuneration.php';
+include MODELS.DS.'modelTypeCours.php';
+include MODELS.DS.'modelDocument.php';
+
 
 if(file_exists(ROOT.DS.'configuration'.DS.'conf.ini')){
   $dipatcher = new Dispatcher();

@@ -57,7 +57,9 @@ class RespFormationController {
                 $classe = "hide";
             }
             $m = new ModelRespFormation();
+            $mF= new ModelFormation();
             $list = $m->getAll();
+            $forma= $mF->getAllFormations();
             include_once VIEWS . DS . 'listRespFormations.php';
         } else {
             include_once VIEWS . DS . 'connexion.php';

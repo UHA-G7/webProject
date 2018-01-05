@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>UHA: Gestion des Vacataires</title>
+        <title>UHA: Gestion dees vacataires</title>
         <?php include_once 'inc/top.php'; ?>  
 
     </head>
@@ -16,12 +16,11 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        UHA <small>Gestion des Vacataires</small>
+                        UHA <small>Gestion des vacataires</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="<?= URL_BASE ?>">Accueil</a></li>
-                        <li><a href="#">Utilisateurs</a></li>
-                        <li class="active"><a href="#">Responsables Administratifs</a></li>
+                        <li><a href="#">Documents</a></li>
                         
                     </ol> 
 
@@ -30,7 +29,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Liste des Responsables Administratifs <a href="<?= URL_BASE ?>/RespAdministratif/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un Responsable Administratif</button></a>
+                            Liste des Documents <a href="<?= URL_BASE ?>/Documents/add/"><button class="btn-default pull-right <?php if(isset($classe)){ echo $classe ;}?>">Ajouter un document</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -38,35 +37,29 @@
                                     <thead>
                                         <tr>
                                             <th>Identifient</th>
-                                            <th>Nom</th>
-                                            <th>Prenom</th>
-                                            <th>Adresse</th>                                            
-                                            <th>Phone</th>
-                                            <th>E-mail</th>
-                                             <th>Formation</th>
+                                            <th>libellé</th>
+                                            <th>Document</th>
+                                            <th>Vacataire</th>                                            
                                             <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                      <?php foreach ($list as $l) {?>  
                                        <tr class="gradeX">
-                                            <td><?= $l['respAdminId'] ?></td>
-                                            <td><?= $l['respAdminNom'] ?></td>
-                                            <td><?= $l['respAdminPrenom'] ?></td>
-                                            <td><?= $l['respAdminAdresse'] ?></td>
-                                            <td><?= $l['respAdminPhone'] ?></td>
-                                            <td><?= $l['respAdminEmail'] ?></td>
+                                            <td><?= $l['documentId'] ?></td>
+                                            <td><?= $l['libelle'] ?></td>
+                                            <td><a href="<?= URL_BASE.'/assets/documents/'. $l['documentUrl'] ?>"><img src="<?= URL_BASE.'/assets/documents/'. $l['documentUrl'] ?>" width="80" height="70"></a></td>
                                             <td>
-                                                <?php foreach($forma as $fo){
-                                                    if($l['formationId']==$fo['formationId'])
-                                                            {
-                                                                echo $fo['formationNom'];
-                                                            
-                                                            }} ?>
+                                               <?php foreach ($vacs as $v){
+                                                  if($l['vacataireId']==$v['vacataireId'])
+                                                        {
+                                                           echo $v['vacataireNom']." ".$v['vacatairePrenom'];
+                                                         }
+                                                   } ?>
                                             </td>
                                             <td class="<?php if(isset($classe)){ echo $classe ;}?>">
-                                                <button class="btn-danger" onclick="supprimerRespAdministratif(<?= $l['respAdminId']?>)">Supprimer</button>
-                                                <a href="<?= URL_BASE.'/RespAdministratif/update?userId='.$l['respAdminId']?>"><button class="btn-default">Modifier</button></a>
+                                                <button class="btn-danger" onclick="supprimerDocument(<?= $l['documentId']?>)">Supprimer</button>
+                                             
                                             </td>
                                             
                                         </tr>

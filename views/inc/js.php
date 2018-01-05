@@ -98,4 +98,42 @@
         return  false;
     }
     ;
+    function supprimerRemuneration(id) {
+
+        if (confirm("Voulez vous vraiment supprimer cette Remuneration ?"))
+        {
+            location.href = "<?= URL_BASE ?>/Remuneration/deleteRemuneration?remunerationId=" + id;
+        }
+        return  false;
+    }
+    ;
+    function supprimerTypeCours(id) {
+
+        if (confirm("Voulez vous vraiment supprimer ce type de cours ?"))
+        {
+            location.href = "<?= URL_BASE ?>/TypeCours/deleteTypeCours?typeCourId=" + id;
+        }
+        return  false;
+    }
+    ;
+    function supprimerCours(id) {
+
+        if (confirm("Voulez vous vraiment supprimer ce cours ?"))
+        {
+            location.href = "<?= URL_BASE ?>/Cours/deleteCours?CoursId=" + id;
+            
+        }
+        return  false;
+    }
+    ;
+    function supprimerDocument(id) {
+
+        if (confirm("Voulez vous vraiment supprimer ce document ?"))
+        {
+            location.href = "<?= URL_BASE ?>/Documents/delete?docId=" + id;
+            
+        }
+        return  false;
+    }
+    ;
 </script>
