@@ -42,6 +42,15 @@ class ModelCours {
         $mat = $req->fetchAll();
         return $mat;
     }
+    // fonction qui renvoi un cours de la base de données
+    public function getCoursByVac($id) {
+        $bdd = Connexion::getInstance();
+        $req = $bdd->prepare("SELECT * FROM cours WHERE vacataireId= :id ");
+        $req->bindValue(':id', $id, PDO::PARAM_STR);
+        $req->execute();
+        $mat = $req->fetchAll();
+        return $mat;
+    }
     // fonction qui modifie les informations d'un cours
     public function updateCours($id, $courDate, $courduree, $courHD, $respAdminId, $vacataireId, $typeId, $remunerationId, $matiereId) {
         $bdd = Connexion::getInstance();
@@ -62,6 +71,18 @@ class ModelCours {
     public function deleteCours($id) {
         $bdd = Connexion::getInstance();
         $req = $bdd->prepare('DELETE FROM cours WHERE courId = :id');
+        $req->execute(array('id' => $id));
+    }
+
+    public function validerCours($id) {
+        $bdd = Connexion::getInstance();
+        $req = $bdd->prepare('UPDATE cours SET valide = "1" WHERE courId = :id');
+        $req->execute(array('id' => $id));
+    }
+
+    public function payerCours($id) {
+        $bdd = Connexion::getInstance();
+        $req = $bdd->prepare('UPDATE cours SET payer = "1" WHERE courId = :id');
         $req->execute(array('id' => $id));
     }
 

@@ -17,10 +17,14 @@
                     <a href="<?= URL_BASE ?>/Documents/add/">Ajouter un document <i class="fa fa-plus "></i></a>
                 </li>
                 <li >
-                    <a href="<?= URL_BASE ?>/Documents/documentsVacataire?id=<?= $_SESSION['id']?>">Mes documents <i class="fa fa-eye "></i></a>
+                    <a href="<?= URL_BASE ?>/Documents/documentsVacataire?vacid=<?= $_SESSION['id']?>">Mes documents <i class="fa fa-eye "></i></a>
                 </li>
                 
             </ul>
+        </li>
+        <li class="dropdown <?php if($_SESSION['profile']!="Vacataire"){ echo 'hide' ;}?>">
+            <a href="<?= URL_BASE ?>/Cours/coursByVacataire/?vacid=<?= $_SESSION['id']?>" > Mes cours <i class="fa fa-file-o"></i> </a>
+            
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -166,10 +170,10 @@
 
                 </ul>
             </li>
-            <li>
+            <!--<li>
                 <a href="#"><i class="fa fa-sitemap"></i>Remuneration<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
+                    <li class="<?php //if(isset($classe)){ echo $classe ;}?>">
                         <a href="<?= URL_BASE ?>/Remuneration/ajoutRemuneration/">Ajouter une remuneration</a>
                     </li>
                     <li>
@@ -177,8 +181,8 @@
                     </li>
 
                 </ul>
-            </li>
-            <li>
+            </li>-->
+            <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                 <a href="#"><i class="fa fa-sitemap"></i>Type de Cours<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="<?php if(isset($classe)){ echo $classe ;}?>">
@@ -190,13 +194,13 @@
 
                 </ul>
             </li>
-            <li>
+            <li class="<?php if(isset($classe) && $_SESSION['profile']=="Vacataire") echo $classe ;?>">
                 <a href="#"><i class="fa fa-sitemap"></i>Cours<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="<?php if(isset($classe)){ echo $classe ;}?>">
+                    <li >
                         <a href="<?= URL_BASE ?>/Cours/ajoutCours/">Ajouter un cours</a>
                     </li>
-                    <li>
+                    <li >
                         <a href="<?= URL_BASE ?>/Cours/listCours/">Liste des cours</a>
                     </li>
 

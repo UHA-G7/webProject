@@ -57,6 +57,7 @@ class ModelRemuneration {
         $req->execute(array('id' => $id));
     }
 
+
 }
 
 ?>

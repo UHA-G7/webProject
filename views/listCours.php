@@ -42,9 +42,10 @@
                                             <th>Date du cours</th>
                                             <th>Duree du cours</th>
                                             <th>Heure de debut</th>
-                                            <th>rémuneration</th>
                                             <th>Vacataire</th>
-                                            <th>Responsable administratif</th>
+                                            <th>Formation</th>
+                                            <th>Validation</th>
+                                            <th>Paiement</th>
                                             <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>
@@ -71,7 +72,6 @@
                                             <td><?= $l['courDate'] ?></td>
                                             <td><?= $l['courduree'] ?></td>
                                             <td><?= $l['courHD'] ?></td>
-                                            <td><?= $l['remunerationId'] ?></td>
                                             <td>
                                                <?php foreach ($vacs as $v){
                                                   if($l['vacataireId']==$v['vacataireId'])
@@ -80,9 +80,34 @@
                                                          }
                                                    } ?>
                                             </td>
-                                            <td><?= $l['respAdminId'] ?></td>
+                                            <td>
+                                                   <?php foreach ($resps as $r){
+                                                       if($r['respAdminId']==$l['respAdminId']){
+                                                           foreach ($forms as $forma){
+                                                               if($r['formationId']==$forma['formationId']){
+                                                                   echo $forma['formationNom'];
+                                                               }
+                                                           }
+                                                       }
+                                                   }  ?>
+                                            </td>
+                                            <td><?php if(($l['valide'] == 0) && ($_SESSION['profile']=="Controleur Gestion")) { ?>
+                                                <button class="btn btn-primary" onclick="validerCours(<?= $l['courId']?>)">Valider</button>
+                                                <?php }
+                                                else if(($l['valide'] == 1)) echo "Validé" ?>
+                                            </td>
+                                            <td><?php if($l['valide'] == 1 && $l['payer'] == 0 && $_SESSION['profile']=="Responsable Financier") { ?>
+                                                <button class="btn btn-primary" onclick="payerCours(<?= $l['courId']?>)">Payer</button>
+                                                <?php }
+                                                else if($l['valide'] == 0 ){
+                                                    echo "";
+                                                }
+                                                else if($l['valide'] == 1 && $l['payer'] == 1 ) echo "Payé" ?>
+                                            </td>
+
                                             <td class="<?php if(isset($classe)){ echo $classe ;}?>">
                                                 <button class="btn-danger" onclick="supprimerCours(<?= $l['courId']?>)">Supprimer</button>
+                                                
                                                 <a href="<?= URL_BASE.'/Cours/modifCours?coursId='.$l['courId']?>"><button class="btn-default">Modifier</button></a>
                                             </td>
                                             

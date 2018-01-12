@@ -27,8 +27,8 @@ class CoursController {
         }
     }
 
-    /* fonction qui met en relation les données du formulaire d'ajout d'une matière
-     * et la fonction addMatiere() du modèle matiere pour l'ajout 
+    /* fonction qui met en relation les données du formulaire d'ajout d'un Cours
+     * et la fonction addCours() du modèle Cours pour l'ajout 
      */
 
     public function actionAjoutCours() {
@@ -47,9 +47,9 @@ class CoursController {
     }
 
     /* fonction qui met en relation les données 
-     * renvoyées par la fonction getAllMatieres()
-     * du modèle matiere 
-     * et la vue qui affihe les matières
+     * renvoyées par la fonction getAllCours()
+     * du modèle Cours 
+     * et la vue qui affihe les Cours
      */
 
     public function listCours() {
@@ -59,12 +59,40 @@ class CoursController {
             }
             $m = new ModelCours();
             $list = $m->getAllCours();
+            $m_forms= new ModelFormation();
+            $forms= $m_forms->getAllFormations();
+            $m_resPform=new ModelRespAdministratif();
+            $resps= $m_resPform->getAll();
             $m_Mat = new ModelMatiere();
             $mats = $m_Mat->getAllMatieres();
-            $m_vac= new ModelVacataire();
-            $vacs=$m_vac->getAll();
-            $m_Tcours=new ModelTypeCours();
-            $types= $m_Tcours->getAllTypeCours();
+            $m_vac = new ModelVacataire();
+            $vacs = $m_vac->getAll();
+            $m_Tcours = new ModelTypeCours();
+            $types = $m_Tcours->getAllTypeCours();
+            include_once VIEWS . DS . 'listCours.php';
+        } else {
+            include_once VIEWS . DS . 'connexion.php';
+        }
+    }
+
+    public function coursByVacataire() {
+        if (isset($_SESSION['login']) && isset($_SESSION['profile'])) {
+            if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Responsable Administratif")) {
+                $classe = "hide";
+            }
+            $id = filter_input(INPUT_GET, 'vacid', FILTER_SANITIZE_NUMBER_INT);
+            $m = new ModelCours();
+            $m_forms= new ModelFormation();
+            $forms= $m_forms->getAllFormations();
+            $m_resPform=new ModelRespAdministratif();
+            $resps= $m_resPform->getAll();
+            $list = $m->getCoursByVac($id);
+            $m_Mat = new ModelMatiere();
+            $mats = $m_Mat->getAllMatieres();
+            $m_vac = new ModelVacataire();
+            $vacs = $m_vac->getAll();
+            $m_Tcours = new ModelTypeCours();
+            $types = $m_Tcours->getAllTypeCours();
             include_once VIEWS . DS . 'listCours.php';
         } else {
             include_once VIEWS . DS . 'connexion.php';
@@ -72,9 +100,9 @@ class CoursController {
     }
 
     /* fonction qui met en relation les donnéss 
-     * renvoyées par la fonction getMatiere()
-     * du modèle matiere 
-     * et le formulaire pour modifier une matière
+     * renvoyées par la fonction getCours()
+     * du modèle Cours 
+     * et le formulaire pour modifier un Cours
      */
 
     public function modifCours() {
@@ -106,9 +134,9 @@ class CoursController {
     }
 
     /* fonction qui met en relation les données 
-     * renvoyées par le formulaire de modification d'une matière
-     * et la fonction updateMatiere() du modeèle matiere
-     * pour la mise à jour d'une matière
+     * renvoyées par le formulaire de modification d'un Cours
+     * et la fonction updateCours() du modeèle Cours
+     * pour la mise à jour d'un Cours
      */
 
     public function actionModifCour() {
@@ -127,8 +155,8 @@ class CoursController {
         header('Location: ' . URL_BASE . '/Cours/listCours');
     }
 
-    /* fonction qui appelle la fonction deleteMatiere()
-     * du modèle matiere pour supprimer une matière
+    /* fonction qui appelle la fonction deleteCours()
+     * du modèle Cours pour supprimer un Cours
      */
 
     public function deleteCours() {
@@ -136,6 +164,22 @@ class CoursController {
         $id = filter_input(INPUT_GET, 'CoursId', FILTER_SANITIZE_STRING);
         $m = new ModelCours();
         $m->deleteCours($id);
+        header('Location: ' . URL_BASE . '/Cours/listCours');
+    }
+
+    public function validerCours() {
+
+        $id = filter_input(INPUT_GET, 'CoursId', FILTER_SANITIZE_STRING);
+        $m = new ModelCours();
+        $m->validerCours($id);
+        header('Location: ' . URL_BASE . '/Cours/listCours');
+    }
+
+    public function payerCours() {
+
+        $id = filter_input(INPUT_GET, 'CoursId', FILTER_SANITIZE_STRING);
+        $m = new ModelCours();
+        $m->payerCours($id);
         header('Location: ' . URL_BASE . '/Cours/listCours');
     }
 

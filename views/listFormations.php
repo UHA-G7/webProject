@@ -38,6 +38,7 @@
                                         <tr>
                                             <th>Identifient</th>
                                             <th>Nom de la formation</th>
+                                            
                                             <th class="<?php if(isset($classe)){ echo $classe ;}?>">Action</th>
                                         </tr>
                                     </thead>

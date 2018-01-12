@@ -136,4 +136,25 @@
         return  false;
     }
     ;
+    function validerCours(id) {
+
+        if (confirm("Voulez vous vraiment valider ce cours ?"))
+        {
+            location.href = "<?= URL_BASE ?>/Cours/validerCours?CoursId=" + id;
+            
+        }
+        return  false;
+    }
+    ;
+    function payerCours(id) {
+
+        if (confirm("Voulez vous vraiment payer ce cours ?"))
+        {
+            location.href = "<?= URL_BASE ?>/Cours/payerCours?CoursId=" + id;
+            
+        }
+        return  false;
+    }
+    ;
+
 </script>

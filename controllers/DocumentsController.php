@@ -100,7 +100,7 @@ class DocumentsController {
             if (($_SESSION['profile'] != "Responsable Formation") && ($_SESSION['profile'] != "Vacataire") && ($_SESSION['profile'] != "Responsable Administratif")) {
                 $classe = "hide";
             }
-            $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+            $id = filter_input(INPUT_GET, 'vacid', FILTER_SANITIZE_STRING);
             $m = new ModelDocument();
             $list = $m->getDocsByVacataire($id);
             $mv = new ModelVacataire();
