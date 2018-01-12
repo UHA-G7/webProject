@@ -23,7 +23,8 @@ class ConnexionController {
         if (isset($_POST['login']) && isset($_POST['pwd']) && isset($_POST['profile']) && $_POST['profile'] !== "") {
             //OUI - Filtre les données envoyées par l'utilisateur
             $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-            $pwd = filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_STRING);
+            $mot = filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_STRING);
+            $pwd= sha1($mot);
             $table = filter_input(INPUT_POST, 'profile', FILTER_SANITIZE_STRING);
             
             //Vérification du couple login/password
@@ -94,8 +95,10 @@ class ConnexionController {
 
     public function doUpdatePwd() {
         $id = filter_input(INPUT_POST, 'userId', FILTER_SANITIZE_NUMBER_INT);
-        $pwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
-        $pwd2 = filter_input(INPUT_POST, 'userPwd2', FILTER_SANITIZE_STRING);
+        $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+         $pwd=sha1($mot);
+        $mot2 = filter_input(INPUT_POST, 'userPwd2', FILTER_SANITIZE_STRING);
+        $pwd2=sha1($mot2);
         if ($pwd == $pwd2) {
             $model = $_SESSION['model'];
             $m = new $model();

@@ -26,7 +26,8 @@ class RespFormationController {
             $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
             $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
             $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-            $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $uPwd = sha1($mot);
             $uFormation = filter_input(INPUT_POST, 'formaId', FILTER_SANITIZE_NUMBER_INT);
             $um = new ModelRespFormation();
             if ($um->add($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd, $uFormation)) {
@@ -57,9 +58,9 @@ class RespFormationController {
                 $classe = "hide";
             }
             $m = new ModelRespFormation();
-            $mF= new ModelFormation();
+            $mF = new ModelFormation();
             $list = $m->getAll();
-            $forma= $mF->getAllFormations();
+            $forma = $mF->getAllFormations();
             include_once VIEWS . DS . 'listRespFormations.php';
         } else {
             include_once VIEWS . DS . 'connexion.php';
@@ -87,9 +88,9 @@ class RespFormationController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }else {
-                header('Location: ' . URL_BASE);
-            }
+        } else {
+            header('Location: ' . URL_BASE);
+        }
     }
 
     /* fonction qui met en relation les données 
@@ -105,7 +106,8 @@ class RespFormationController {
         $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
         $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
         $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-        $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $uPwd = sha1($mot);
         $uFormation = filter_input(INPUT_POST, 'formaId', FILTER_SANITIZE_NUMBER_INT);
         $m = new ModelRespFormation();
         if ($m->update($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd, $uFormation, $id)) {

@@ -28,7 +28,8 @@ class VacataireController {
             $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
             $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
             $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-            $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $uPwd=sha1($mot);
             $uEmp = filter_input(INPUT_POST, 'userEmp', FILTER_SANITIZE_STRING);
             $um = new ModelVacataire();
             if ($um->add($uNom, $uPrenom, $uAdresse, $uPhone, $uEmp, $uEmail, $uPwd)) {
@@ -100,7 +101,8 @@ class VacataireController {
         $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
         $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
         $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-        $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $uPwd=sha1($mot);
         $uEmp = filter_input(INPUT_POST, 'userEmp', FILTER_SANITIZE_STRING);
         $m = new ModelVacataire();
         $m->update($uNom, $uPrenom, $uAdresse, $uPhone, $uEmp, $uEmail, $uPwd, $id);

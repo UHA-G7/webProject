@@ -26,7 +26,8 @@ class RespAdministratifController {
             $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
             $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
             $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-            $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $uPwd = sha1($mot);
             $uformation = filter_input(INPUT_POST, 'formaId', FILTER_SANITIZE_NUMBER_INT);
             $um = new ModelRespAdministratif();
             if ($um->add($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd, $uformation)) {
@@ -57,9 +58,9 @@ class RespAdministratifController {
                 $classe = "hide";
             }
             $m = new ModelRespAdministratif();
-            $mF= new ModelFormation();
+            $mF = new ModelFormation();
             $list = $m->getAll();
-            $forma= $mF->getAllFormations();
+            $forma = $mF->getAllFormations();
             include_once VIEWS . DS . 'listRespAdministratifs.php';
         } else {
             include_once VIEWS . DS . 'connexion.php';
@@ -91,7 +92,7 @@ class RespAdministratifController {
             header('Location: ' . URL_BASE);
         }
     }
-    
+
     /* fonction qui met en relation les données 
      * renvoyées par le formulaire de modification d'un Responsable Administratif
      * et la fonction update() du modeèle Responsable Administratif
@@ -105,7 +106,8 @@ class RespAdministratifController {
         $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
         $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
         $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-        $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $uPwd = sha1($mot);
         $uformation = filter_input(INPUT_POST, 'formaId', FILTER_SANITIZE_NUMBER_INT);
         $m = new ModelRespAdministratif();
         if ($m->update($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd, $uformation, $id)) {

@@ -24,7 +24,8 @@ class ContGestionController {
             $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
             $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
             $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-            $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+            $uPwd = sha1($mot);
             $um = new ModelContGestion();
             if ($um->add($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd)) {
                 $message = "Le Controleur Gestion a bien été ajouté en base de données";
@@ -79,9 +80,9 @@ class ContGestionController {
             } else {
                 header('Location: ' . URL_BASE);
             }
-        }else {
-                header('Location: ' . URL_BASE);
-            }
+        } else {
+            header('Location: ' . URL_BASE);
+        }
     }
 
     /* fonction qui met en relation les données 
@@ -97,7 +98,8 @@ class ContGestionController {
         $uAdresse = filter_input(INPUT_POST, 'userAddr', FILTER_SANITIZE_STRING);
         $uPhone = filter_input(INPUT_POST, 'userPhone', FILTER_SANITIZE_NUMBER_INT);
         $uEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_STRING);
-        $uPwd = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $mot = filter_input(INPUT_POST, 'userPwd', FILTER_SANITIZE_STRING);
+        $uPwd = sha1($mot);
         $m = new ModelContGestion();
         if ($m->update($uNom, $uPrenom, $uAdresse, $uPhone, $uEmail, $uPwd, $id)) {
             $message = "Le Controleur Gestion a bien été mise a jour";
