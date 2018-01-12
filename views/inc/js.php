@@ -98,15 +98,7 @@
         return  false;
     }
     ;
-    function supprimerRemuneration(id) {
-
-        if (confirm("Voulez vous vraiment supprimer cette Remuneration ?"))
-        {
-            location.href = "<?= URL_BASE ?>/Remuneration/deleteRemuneration?remunerationId=" + id;
-        }
-        return  false;
-    }
-    ;
+    
     function supprimerTypeCours(id) {
 
         if (confirm("Voulez vous vraiment supprimer ce type de cours ?"))
