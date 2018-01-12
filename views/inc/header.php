@@ -141,7 +141,7 @@
                         <a href="<?= URL_BASE ?>/Faculte/ajoutFaculte/">Ajouter une faculté</a>
                     </li>
                     <li>
-                        <a href="<?= URL_BASE ?>/Faculte/listFacultes/">Liste des facultés</a>
+                        <a href="<?= URL_BASE ?>/Faculte/listFacultes/">Liste des facultés<i class="fa fa-eye "></i></a>
                     </li>
 
                 </ul>
@@ -153,7 +153,7 @@
                         <a href="<?= URL_BASE ?>/Formation/ajoutFormation/">Ajouter une formation</a>
                     </li>
                     <li>
-                        <a href="<?= URL_BASE ?>/Formation/listFormations/">Liste des formation</a>
+                        <a href="<?= URL_BASE ?>/Formation/listFormations/">Liste des formation <i class="fa fa-eye "></i></a>
                     </li>
 
                 </ul>
@@ -165,23 +165,12 @@
                         <a href="<?= URL_BASE ?>/Matiere/ajoutMatiere/">Ajouter une matières</a>
                     </li>
                     <li>
-                        <a href="<?= URL_BASE ?>/Matiere/listMatieres/">Liste des matières</a>
+                        <a href="<?= URL_BASE ?>/Matiere/listMatieres/">Liste des matières <i class="fa fa-eye "></i></a>
                     </li>
 
                 </ul>
             </li>
-            <!--<li>
-                <a href="#"><i class="fa fa-sitemap"></i>Remuneration<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li class="<?php //if(isset($classe)){ echo $classe ;}?>">
-                        <a href="<?= URL_BASE ?>/Remuneration/ajoutRemuneration/">Ajouter une remuneration</a>
-                    </li>
-                    <li>
-                        <a href="<?= URL_BASE ?>/Remuneration/listRemunerations/">Liste des remunerations</a>
-                    </li>
-
-                </ul>
-            </li>-->
+            
             <li class="<?php if(isset($classe)){ echo $classe ;}?>">
                 <a href="#"><i class="fa fa-sitemap"></i>Type de Cours<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -189,7 +178,7 @@
                         <a href="<?= URL_BASE ?>/TypeCours/ajoutTypeCours/">Ajouter un type de cours</a>
                     </li>
                     <li>
-                        <a href="<?= URL_BASE ?>/TypeCours/listTypeCours/">Liste des type de cours</a>
+                        <a href="<?= URL_BASE ?>/TypeCours/listTypeCours/">Liste des type de cours <i class="fa fa-eye "></i></a>
                     </li>
 
                 </ul>
@@ -197,11 +186,11 @@
             <li class="<?php if(isset($classe) && $_SESSION['profile']=="Vacataire") echo $classe ;?>">
                 <a href="#"><i class="fa fa-sitemap"></i>Cours<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li >
+                    <li class="<?php if($_SESSION['profile']=="Controleur Gestion" || $_SESSION['profile']=="Responsable Financier") echo $classe ;?>">
                         <a href="<?= URL_BASE ?>/Cours/ajoutCours/">Ajouter un cours</a>
                     </li>
                     <li >
-                        <a href="<?= URL_BASE ?>/Cours/listCours/">Liste des cours</a>
+                        <a href="<?= URL_BASE ?>/Cours/listCours/">Liste des cours <i class="fa fa-eye "></i></a>
                     </li>
 
                 </ul>
