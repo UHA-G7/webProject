@@ -5,7 +5,7 @@
         <title>Se connecter</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
+        <link rel="stylesheet" href="../assets/css/style.css">
 
         <style>
             /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
@@ -38,7 +38,7 @@
             }
             .login { 
                 position: absolute;
-                top: 50%;
+                top: 60%;
                 left: 50%;
                 margin: -150px 0 0 -150px;
                 width:300px;
@@ -49,12 +49,12 @@
             input, select { 
                 width: 100%; 
                 margin-bottom: 10px; 
-                background: rgba(0,0,0,0.3);
+                background: #fff;
                 border: none;
                 outline: none;
                 padding: 10px;
-                font-size: 13px;
-                color: #fff;
+                font-size: 20px;
+                color: #000;
                 text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
                 border: 1px solid rgba(0,0,0,0.3);
                 border-radius: 4px;
@@ -66,7 +66,7 @@
                 transition: box-shadow .5s ease;
             }
             input:focus, select:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
-
+            .opt{background-color:rgba(0,0,0,0.3)!important }
         </style>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -74,16 +74,22 @@
     </head>
 
     <body>
+        <div class="row" style="text-align: center">
+           
+            <img src="../assets/img/uha-logo.png" class="img-responsive"/>
+            <p class="gesvac">Gestion Des Vacataires</p>
+        </div>
         <div class="login">
+
             <h1>Connexion</h1>
             <form method="post" action="<?= URL_BASE . '/Connexion/doLogin' ?>">
                 <select name="profile" >
-                    <option value="">Selectionner votre profile</option>
-                    <option value="RespFormation">Responsable Formation</option>   
-                    <option value="RespAdministratif">Responsable Administratif</option> 
-                    <option value="ContGestion"> Controleur Gestion</option> 
-                    <option value="RespFinancier">Responsable Financier</option>  
-                    <option value="Vacataire">Vacataire</option>                      
+                    <option class="opt" value="">Selectionner votre profile</option>
+                    <option class="opt" value="RespFormation">Responsable Formation</option>   
+                    <option class="opt" value="RespAdministratif">Responsable Administratif</option> 
+                    <option class="opt" value="ContGestion"> Controleur Gestion</option> 
+                    <option class="opt" value="RespFinancier">Responsable Financier</option>  
+                    <option class="opt" value="Vacataire">Vacataire</option>                      
                 </select>
                 <input type="text" name="login" placeholder="Votre Login" required="required" />
                 <input type="password" name="pwd" placeholder="Votre Mot de passe" required="required" />
