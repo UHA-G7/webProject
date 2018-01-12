@@ -18,8 +18,6 @@ class CoursController {
                 $forms2 = $mform->getAll();
                 $mform = new modelRespAdministratif();
                 $forms3 = $mform->getAll();
-                $mform = new ModelRemuneration();
-                $forms4 = $mform->getAllRemunerations();
                 include_once VIEWS . DS . 'ajoutCours.php';
             } else {
                 header('Location: ' . URL_BASE);
@@ -120,8 +118,6 @@ class CoursController {
                 $forms2 = $mform->getAll();
                 $mform = new modelRespAdministratif();
                 $forms3 = $mform->getAll();
-                $mform = new ModelRemuneration();
-                $forms4 = $mform->getAllRemunerations();
                 $functionUrl = "actionModifCour";
                 $sub_title = "Modification d'un cours";
                 include_once VIEWS . DS . 'ajoutCours.php';

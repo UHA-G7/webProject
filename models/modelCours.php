@@ -12,8 +12,8 @@ class ModelCours {
     
     public function addCours($courDate, $courduree, $courHD, $respAdminId, $vacataireId, $typeId, $remunerationId, $matiereId){
         $bdd = Connexion::getInstance();
-        $req = $bdd->prepare('INSERT INTO cours (courDate, courduree, courHD, respAdminId, vacataireId, typeCourId, remunerationId, matiereId) 
-        VALUES (:courDate, :courduree, :courHD, :respAdminId, :vacataireId, :typeCourId, :remunerationId, :matiereId)');
+        $req = $bdd->prepare('INSERT INTO cours (courDate, courduree, courHD, respAdminId, vacataireId, typeCourId, matiereId) 
+        VALUES (:courDate, :courduree, :courHD, :respAdminId, :vacataireId, :typeCourId, :matiereId)');
         $req->execute(array(
             'courDate' => $courDate,
             'courduree' => $courduree,
@@ -21,7 +21,6 @@ class ModelCours {
             'respAdminId' => $respAdminId,
             'vacataireId' => $vacataireId,
             'typeCourId' => $typeId,
-            'remunerationId' => $remunerationId,
             'matiereId' => $matiereId
         ));
     }
@@ -54,7 +53,7 @@ class ModelCours {
     // fonction qui modifie les informations d'un cours
     public function updateCours($id, $courDate, $courduree, $courHD, $respAdminId, $vacataireId, $typeId, $remunerationId, $matiereId) {
         $bdd = Connexion::getInstance();
-        $req = $bdd->prepare('UPDATE cours SET courDate = :courDate, courduree = :courduree, courHD = :courHD, respAdminId = :respAdminId, vacataireId = :vacataireId, typeCourId = :typeCourId, remunerationId = :remunerationId, matiereId = :matiereId  WHERE courId = :id');
+        $req = $bdd->prepare('UPDATE cours SET courDate = :courDate, courduree = :courduree, courHD = :courHD, respAdminId = :respAdminId, vacataireId = :vacataireId, typeCourId = :typeCourId, matiereId = :matiereId  WHERE courId = :id');
         $req->execute(array(
             'id' => $id,
             'courDate' => $courDate,
@@ -63,7 +62,6 @@ class ModelCours {
             'respAdminId' => $respAdminId,
             'vacataireId' => $vacataireId,
             'typeCourId' => $typeId,
-            'remunerationId' => $remunerationId,
             'matiereId' => $matiereId
         ));
     }
